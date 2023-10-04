@@ -4,10 +4,7 @@ import com.malachy.student.dto.request.StudentDto;
 import com.malachy.student.dto.response.ApiResponse;
 import com.malachy.student.studentService.StudentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,7 +16,7 @@ private final StudentService studentService;
 
 
 @PostMapping("registerStudent")
-    public ApiResponse registerStudent(StudentDto studentDto){
+    public ApiResponse registerStudent(@RequestBody StudentDto studentDto){
        return studentService.registerStudent(studentDto);
 
     }
