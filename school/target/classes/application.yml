@@ -21,10 +21,14 @@ spring:
     password: 1234567890
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
 
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+application:
+  config:
+    students-url: http://localhost:8090/api/v1/students
 
 
 

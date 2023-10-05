@@ -13,5 +13,5 @@ public interface StudentService {
 
    // ApiResponse<List<StudentWithSchoolDto> >findAllStudent(Long studentId);
 
-    ApiResponse<List<StudentWithSchoolDto>>getAllStudentWithSchoolId(Long studentId);
+    List<StudentWithSchoolDto>getAllStudentWithSchoolId(Long studentId);
 }

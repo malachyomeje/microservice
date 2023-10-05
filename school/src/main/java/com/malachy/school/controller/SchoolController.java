@@ -11,7 +11,7 @@ import java.util.List;
 
     @RestController
     @RequiredArgsConstructor
-    @RequestMapping("school")
+    @RequestMapping("api/v1/schools")
 
 public class SchoolController {
 
@@ -29,10 +29,10 @@ public class SchoolController {
             return schoolService.findAllSchool();
         }
 
-        @GetMapping("schoolWithStudent")
-        public SchoolWithStudentResponse schoolWithStudent(@RequestParam String schoolEmail){
+        @GetMapping("schoolWithStudent/{schoolId}")
+        public SchoolWithStudentResponse getAllStudentWithSchoolId(@PathVariable Long schoolId){
 
-            return schoolService.schoolWithStudent(schoolEmail);
+            return schoolService.schoolWithStudent(schoolId);
         }
 
     }

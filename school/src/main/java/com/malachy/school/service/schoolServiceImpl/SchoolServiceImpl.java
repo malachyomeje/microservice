@@ -5,6 +5,7 @@ import com.malachy.school.dto.response.SchoolWithStudentResponse;
 import com.malachy.school.dto.schoolDto.SchoolDto;
 import com.malachy.school.dto.response.ApiResponse;
 import com.malachy.school.model.School;
+import com.malachy.school.model.Student;
 import com.malachy.school.repository.SchoolRepository;
 import com.malachy.school.service.SchoolService;
 import lombok.RequiredArgsConstructor;

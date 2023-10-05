@@ -46,7 +46,7 @@ public class StudentServiceImpl implements StudentService {
             studentDto.setFirstName(student1.getFirstName());
             studentDto.setLastName(student1.getLastName());
             studentDto.setEmail(student1.getEmail());
-            studentDto.setSchoolId(studentDto.getSchoolId());
+            studentDto.setSchoolId(student1.getSchoolId());
             list.add(studentDto);
 
         }
@@ -54,7 +54,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public ApiResponse<List<StudentWithSchoolDto>>getAllStudentWithSchoolId(Long schoolId) {
+    public List<StudentWithSchoolDto>getAllStudentWithSchoolId(Long schoolId) {
 
         List<Students> studentsList = studentsRepository.findAllBySchoolId(schoolId);
         List<StudentWithSchoolDto> list = new ArrayList<>();
@@ -69,6 +69,6 @@ public class StudentServiceImpl implements StudentService {
             list.add(studentWithSchoolDto);
 
         }
-        return new ApiResponse<>("Success",list);
+        return list;
     }
 }

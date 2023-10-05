@@ -13,7 +13,7 @@ public interface StudentClient {
 
     @GetMapping("getAllStudentWithSchoolId/{schoolId}")
 
-    List<Student>  findAllStudentBySchool(@PathVariable("schoolId") Long schoolId);
+    List<Student> findAllStudentBySchool(@PathVariable("schoolId") Long schoolId);
 
 
 

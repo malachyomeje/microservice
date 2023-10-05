@@ -29,7 +29,7 @@ private final StudentService studentService;
 
 
     @GetMapping("getAllStudentWithSchoolId/{schoolId}")
-    public ApiResponse<List<StudentWithSchoolDto>>
+    public List<StudentWithSchoolDto>
     getAllStudentWithSchoolId(@PathVariable("schoolId") Long schoolId){
         return studentService.getAllStudentWithSchoolId(schoolId);
     }
