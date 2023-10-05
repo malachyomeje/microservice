@@ -1,5 +1,6 @@
 package com.malachy.school.service.schoolServiceImpl;
 
+import com.malachy.school.client.StudentClient;
 import com.malachy.school.dto.response.SchoolWithStudentResponse;
 import com.malachy.school.dto.schoolDto.SchoolDto;
 import com.malachy.school.dto.response.ApiResponse;
@@ -17,6 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SchoolServiceImpl implements SchoolService {
     private final SchoolRepository schoolRepository;
+    private final StudentClient studentClient;
 
     @Override
     public ApiResponse registerSchool(SchoolDto schoolDto) {
@@ -53,7 +55,7 @@ public class SchoolServiceImpl implements SchoolService {
     public SchoolWithStudentResponse schoolWithStudent(String schoolEmail) {
         Optional<School> school = schoolRepository.findByEmail(schoolEmail);
         if (school.isEmpty()) {
-            return null;
+
         }
         return new SchoolWithStudentResponse();
     }

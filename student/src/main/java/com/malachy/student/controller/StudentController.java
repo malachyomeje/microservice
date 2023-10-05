@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("students")
+@RequestMapping("/api/v1/students")
 public class StudentController {
 private final StudentService studentService;
 
@@ -28,8 +28,9 @@ private final StudentService studentService;
     }
 
 
-    @GetMapping("getAllStudent")
-    public ApiResponse<List<StudentWithSchoolDto>> getAllStudentWithSchoolId(Long schoolId){
+    @GetMapping("getAllStudentWithSchoolId/{schoolId}")
+    public ApiResponse<List<StudentWithSchoolDto>>
+    getAllStudentWithSchoolId(@PathVariable("schoolId") Long schoolId){
         return studentService.getAllStudentWithSchoolId(schoolId);
     }
 
