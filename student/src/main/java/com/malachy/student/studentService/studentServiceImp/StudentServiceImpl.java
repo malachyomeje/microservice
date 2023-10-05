@@ -1,6 +1,7 @@
 package com.malachy.student.studentService.studentServiceImp;
 
 import com.malachy.student.dto.request.StudentDto;
+import com.malachy.student.dto.request.StudentWithSchoolDto;
 import com.malachy.student.dto.response.ApiResponse;
 import com.malachy.student.model.Students;
 import com.malachy.student.repository.StudentsRepository;
@@ -16,40 +17,58 @@ import java.util.Optional;
 @RequiredArgsConstructor
 
 public class StudentServiceImpl implements StudentService {
-     private final StudentsRepository studentsRepository;
+    private final StudentsRepository studentsRepository;
 
-     @Override
-    public ApiResponse registerStudent(StudentDto studentDto){
+    @Override
+    public ApiResponse registerStudent(StudentDto studentDto) {
         Optional<Students> student = studentsRepository.findByEmail(studentDto.getEmail());
-        if (student.isPresent()){
-            return new ApiResponse<>("Student Already Exist",studentDto.getEmail());
+        if (student.isPresent()) {
+            return new ApiResponse<>("Student Already Exist", studentDto.getEmail());
         }
-        Students students =Students.builder()
+        Students students = Students.builder()
                 .firstName(studentDto.getFirstName())
                 .lastName(studentDto.getLastName())
                 .email(studentDto.getEmail())
                 .schoolId(studentDto.getSchoolId())
                 .build();
         studentsRepository.save(students);
-        return new ApiResponse<>("Registration Successfully",students);
+        return new ApiResponse<>("Registration Successfully", students);
     }
 
 
     @Override
-    public List<StudentDto> findAllStudent(){
-        List<Students> studentsList= studentsRepository.findAll();
-        List<StudentDto>list = new ArrayList<>();
-        for(Students student1: studentsList){
+    public List<StudentDto> findAllStudent() {
+        List<Students> studentsList = studentsRepository.findAll();
+        List<StudentDto> list = new ArrayList<>();
+        for (Students student1 : studentsList) {
 
-        StudentDto studentDto= new StudentDto();
-           studentDto.setFirstName(student1.getFirstName());
-           studentDto.setLastName(student1.getLastName());
-           studentDto.setEmail(student1.getEmail());
-           studentDto.setSchoolId(studentDto.getSchoolId());
-
-           list.add(studentDto);
+            StudentDto studentDto = new StudentDto();
+            studentDto.setFirstName(student1.getFirstName());
+            studentDto.setLastName(student1.getLastName());
+            studentDto.setEmail(student1.getEmail());
+            studentDto.setSchoolId(studentDto.getSchoolId());
+            list.add(studentDto);
 
         }
         return list;
+    }
+
+    @Override
+    public ApiResponse<List<StudentWithSchoolDto>>getAllStudentWithSchoolId(Long schoolId) {
+
+        List<Students> studentsList = studentsRepository.findAllBySchoolId(schoolId);
+        List<StudentWithSchoolDto> list = new ArrayList<>();
+        for (Students student1 : studentsList) {
+
+            StudentWithSchoolDto studentWithSchoolDto = new StudentWithSchoolDto();
+
+            studentWithSchoolDto.setFirstName(student1.getFirstName());
+            studentWithSchoolDto.setLastName(student1.getLastName());
+            studentWithSchoolDto.setEmail(student1.getEmail());
+
+            list.add(studentWithSchoolDto);
+
+        }
+        return new ApiResponse<>("Success",list);
     }
 }
