@@ -11,5 +11,7 @@ public interface SchoolService {
 
     List<SchoolDto> findAllSchool();
 
-    SchoolWithStudentResponse schoolWithStudent(String schoolEmail);
+   // SchoolWithStudentResponse schoolWithStudent(String schoolEmail);
+
+    SchoolWithStudentResponse schoolWithStudent(Long studentId);
 }
