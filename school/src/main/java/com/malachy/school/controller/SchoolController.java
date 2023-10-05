@@ -1,5 +1,6 @@
 package com.malachy.school.controller;
 
+import com.malachy.school.dto.response.SchoolWithStudentResponse;
 import com.malachy.school.dto.schoolDto.SchoolDto;
 import com.malachy.school.dto.response.ApiResponse;
 import com.malachy.school.service.SchoolService;
@@ -28,6 +29,11 @@ public class SchoolController {
             return schoolService.findAllSchool();
         }
 
+        @GetMapping("schoolWithStudent")
+        public SchoolWithStudentResponse schoolWithStudent(@RequestParam String schoolEmail){
+
+            return schoolService.schoolWithStudent(schoolEmail);
+        }
 
     }
 
