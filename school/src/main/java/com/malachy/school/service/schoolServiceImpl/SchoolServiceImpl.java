@@ -50,11 +50,18 @@ public class SchoolServiceImpl implements SchoolService {
     }
 
     @Override
-    public SchoolWithStudentResponse schoolWithStudent(String schoolEmail) {
-        Optional<School> school = schoolRepository.findByEmail(schoolEmail);
-        if (school.isEmpty()) {
-            return null;
-        }
-        return new SchoolWithStudentResponse();
+    public SchoolWithStudentResponse schoolWithStudent(Long studentId) {
+        School school = schoolRepository.findById(studentId)
+//        if (school.isEmpty()) {
+//            return null;
+                .orElse(School.builder()
+                        .email("NOT FOUND")
+                        .name("NOT FOUND")
+                        .build());
+
+      var student = null; // FIND ALL STUDENT FROM MICROSERVICE
+
+
+        return null;
     }
 }
