@@ -1,5 +1,6 @@
 package com.malachy.school.service.schoolServiceImpl;
 
+import com.malachy.school.client.StudentClient;
 import com.malachy.school.dto.response.SchoolWithStudentResponse;
 import com.malachy.school.dto.schoolDto.SchoolDto;
 import com.malachy.school.dto.response.ApiResponse;
@@ -17,6 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SchoolServiceImpl implements SchoolService {
     private final SchoolRepository schoolRepository;
+    private final StudentClient client;
 
     @Override
     public ApiResponse registerSchool(SchoolDto schoolDto) {
@@ -50,8 +52,8 @@ public class SchoolServiceImpl implements SchoolService {
     }
 
     @Override
-    public SchoolWithStudentResponse schoolWithStudent(Long studentId) {
-        School school = schoolRepository.findById(studentId)
+    public SchoolWithStudentResponse schoolWithStudent(Long schoolId) {
+        School school = schoolRepository.findById(schoolId)
 //        if (school.isEmpty()) {
 //            return null;
                 .orElse(School.builder()
@@ -59,9 +61,12 @@ public class SchoolServiceImpl implements SchoolService {
                         .name("NOT FOUND")
                         .build());
 
-      var student = null; // FIND ALL STUDENT FROM MICROSERVICE
+      var student = client.findAllStudentBySchool(schoolId); // FIND ALL STUDENT FROM MICROSERVICE
 
-
-        return null;
+        return SchoolWithStudentResponse.builder()
+                .name(school.getName())
+                .email(school.getEmail())
+                .students(student)
+                .build();
     }
 }
